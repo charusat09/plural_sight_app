@@ -2,6 +2,10 @@
   "name": "plural-sight-app",
   "version": "1.0.0",
   "description": "Building Plural Sight App",
+  "scripts": {
+    "prestart": "babel-node tools/startMessage.js",
+    "start": "babel-node tools/srcServer.js"
+  },
   "author": "Mayurkumar Patel",
   "license": "MIT",
   "dependencies": {
