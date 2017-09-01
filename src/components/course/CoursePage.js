@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import * as courseActions from '../../actions/CourseActions';
 
 class CoursePage extends React.Component {
@@ -20,7 +21,7 @@ class CoursePage extends React.Component {
   }
 
   onClickSave() {
-    this.props.dispatch(courseActions.createCourse(this.state.course));
+    this.props.actions.createCourse(this.state.course);
     // dispatch is attached here because we didn't pass
     // mapDispatchToProps in connect
   }
@@ -55,7 +56,7 @@ class CoursePage extends React.Component {
 }
 
 CoursePage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  actions: PropTypes.object.isRequired,
   courses: PropTypes.array.isRequired
 };
 
@@ -65,4 +66,10 @@ function mapToStateToProps(state, ownProps) {
   };
 }
 
-export default connect(mapToStateToProps)(CoursePage);
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(courseActions, dispatch)
+  }
+}
+
+export default connect(mapToStateToProps, mapDispatchToProps)(CoursePage);
