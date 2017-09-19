@@ -1,9 +1,11 @@
 import React, {PropTypes} from 'react';
+import toastrMessage from 'toastr';
 
 const TextInput = ({name, label, onChange, placeholder, value, error}) => {
   let wrapperClass = 'form-group';
   if(error && error.length > 0) {
     wrapperClass += " " + "has-error";
+    toastrMessage.error(error);
   }
 
   return(
@@ -17,7 +19,6 @@ const TextInput = ({name, label, onChange, placeholder, value, error}) => {
           placeholder={placeholder}
           value={value}
           onChange={onChange}/>
-        {error && <div className="alert alert-danger">{error}</div>}
       </div>
     </div>
   );
